@@ -1,0 +1,103 @@
+{{ form_start(get_artist_information_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'get-artist-information-ajax'|default('form')} }) }}
+{{ form_end(get_artist_information_form_ajax) }}
+
+{{ form_start(get_artist_list_form_ajax, { 'attr' : {'novalidate': 'novalidate', 'role' : 'form', 'id': 'get-artist-list-ajax'|default('form')} }) }}
+{{ form_end(get_artist_list_form_ajax) }}
+
+<div id="artistInformation">
+{#
+    username
+    followers
+    following
+    amount of views
+    lists by artist
+    customizable list 
+#}
+</div>
+
+<div id="artistList">
+    
+</div>
+
+<div id="artistBundle">
+    status Session
+</div>
+
+<script>
+    
+    window.onload = getArtistInformation();
+    window.onload = getArtistList();
+    
+    function getArtistInformation()
+    {
+        var form = $('#get-artist-information-ajax');
+        var url = form.attr('action');
+
+        $.post(url, function (data)
+        {
+{#            var sessionStatus = data[0].sessionStatus;
+
+            if (sessionStatus === "0")
+            {
+                var artistBundle = document.getElementById('artistBundle');
+                artistBundle.innerHTML = "artistBundle... logout mode";
+            } else
+            {
+                var artistBundle = document.getElementById('artistBundle');
+                artistBundle.innerHTML = "artistBundle... login mode";
+            }#}
+            alert("functiona... get-artist-information-ajax");
+        }).fail(function () {
+            alert('ERROR get-artist-information-ajax');
+        });
+    }
+    
+    function getArtistList()
+    {
+        var form = $('#get-artist-list-ajax');
+        var url = form.attr('action');
+
+        $.post(url, function (data)
+        {
+{#            var sessionStatus = data[0].sessionStatus;
+
+            if (sessionStatus === "0")
+            {
+                var artistBundle = document.getElementById('artistBundle');
+                artistBundle.innerHTML = "artistBundle... logout mode";
+            } else
+            {
+                var artistBundle = document.getElementById('artistBundle');
+                artistBundle.innerHTML = "artistBundle... login mode";
+            }#}
+            alert("funciona... get-artist-list-ajax");
+        }).fail(function () {
+            alert('ERROR... get-artist-list-ajax');
+        });
+    }
+    
+    window.onload = prepareArtistBundle();
+
+    function prepareArtistBundle()
+    {
+        var form = $('#check-session-ajax');
+        var url = form.attr('action');
+
+        $.post(url, function (data)
+        {
+            var sessionStatus = data[0].sessionStatus;
+
+            if (sessionStatus === "0")
+            {
+                var artistBundle = document.getElementById('artistBundle');
+                artistBundle.innerHTML = "artistBundle... logout mode";
+            } else
+            {
+                var artistBundle = document.getElementById('artistBundle');
+                artistBundle.innerHTML = "artistBundle... login mode";
+            }
+        }).fail(function () {
+            alert('ERROR');
+        });
+    }
+</script>
